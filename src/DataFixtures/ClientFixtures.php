@@ -5,20 +5,20 @@ namespace App\DataFixtures;
 use App\Entity\Client;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ClientFixtures extends Fixture
 {
     private $clients = ['sfr', 'free'];
 
     /**
-     * @var UserPasswordEncoderInterface
+     * @var UserPasswordHasherInterface
      */
-    private $userPasswordEncoder;
+    private $userPasswordHasher;
 
-    public function __construct(UserPasswordEncoderInterface $userPasswordEncoder)
+    public function __construct(UserPasswordHasherInterface $userPasswordHasher)
     {
-        $this->userPasswordEncoder = $userPasswordEncoder;
+        $this->userPasswordHasher = $userPasswordHasher;
     }
 
     public function load(ObjectManager $manager)
@@ -27,7 +27,7 @@ class ClientFixtures extends Fixture
             $client =  new Client();
             $client->setUsername($item);
             $pass = 'pass';
-            $password = $this->userPasswordEncoder->encodePassword($client, $pass);
+            $password = $this->userPasswordHasher->hashPassword($client, $pass);
             $client->setPassword($password);
             $client->setRoles($client->getRoles());
 

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -17,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="bilemo_client")
  * @UniqueEntity(fields={"username"}, message="Cet identifiant est déjà utilisé")
  */
-class Client implements UserInterface
+class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id()
@@ -62,10 +63,15 @@ class Client implements UserInterface
     }
 
     /**
-     * A visual identifier that represents this user.
+     * The public representation of the user (e.g. a username, an email address, etc.)
      *
      * @see UserInterface
      */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->username;
+    }
+
     public function getUsername(): string
     {
         return (string) $this->username;
@@ -98,11 +104,11 @@ class Client implements UserInterface
     }
 
     /**
-     * @see UserInterface
+     * @see PasswordAuthenticatedUserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -113,11 +119,14 @@ class Client implements UserInterface
     }
 
     /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
      * @see UserInterface
      */
-    public function getSalt()
+    public function getSalt(): ?string
     {
-        // not needed when using the "bcrypt" algorithm in security.yaml
+        return null;
     }
 
     /**
