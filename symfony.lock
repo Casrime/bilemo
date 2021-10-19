@@ -1,7 +1,4 @@
 {
-    "api-platform/api-pack": {
-        "version": "v1.2.0"
-    },
     "api-platform/core": {
         "version": "2.1",
         "recipe": {
@@ -274,9 +271,6 @@
     },
     "symfony/process": {
         "version": "v4.2.2"
-    },
-    "symfony/profiler-pack": {
-        "version": "v1.0.4"
     },
     "symfony/property-access": {
         "version": "v4.2.2"
