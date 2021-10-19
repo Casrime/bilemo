@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
+ * @ORM\Table(name="bilemo_client")
  * @UniqueEntity(fields={"username"}, message="Cet identifiant est déjà utilisé")
  */
 class Client implements UserInterface

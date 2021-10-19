@@ -16,6 +16,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     },
  *     itemOperations={"get"={"method"="GET"}})
  * @ORM\Entity(repositoryClass="App\Repository\PhoneRepository")
+ * @ORM\Table(name="bilemo_phone")
  */
 class Phone
 {

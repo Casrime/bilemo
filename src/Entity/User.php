@@ -24,6 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Table(name="bilemo_user")
  * @UniqueEntity(fields={"pseudo"}, message="Cet identifiant est déjà utilisé")
  */
 class User
