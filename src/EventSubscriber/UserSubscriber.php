@@ -4,7 +4,7 @@ namespace App\EventSubscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -23,7 +23,7 @@ class UserSubscriber implements EventSubscriberInterface
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function addUser(GetResponseForControllerResultEvent $event)
+    public function addUser(ViewEvent $event)
     {
         if($event->isMasterRequest() && $event->getRequest()->isMethod('POST') && $event->getRequest()->getPathInfo() == "/api/users") {
             $user = $event->getControllerResult();
