@@ -1,0 +1,12 @@
+parameters:
+    # pass
+    hash: $2y$13$uBBGJBVupQMs5QM1rYZRXeqW2sLYdJb812m0wWAD.q/eezfuS185C
+
+App\Entity\Client:
+    client_one:
+        password: <{hash}>
+        username: sfr
+
+    client_two:
+        password: <{hash}>
+        username: free
