@@ -2,6 +2,7 @@
 
 namespace App\Tests\Functional;
 
+use App\Entity\User;
 use App\Tests\BaseApplication;
 
 class UserTest extends BaseApplication
@@ -36,7 +37,7 @@ class UserTest extends BaseApplication
     public function testUserPostCollectionWithLoginWithoutValues(): void
     {
         $token = $this->login();
-        $response = static::createClient()->request('POST', '/api/users', [
+        static::createClient()->request('POST', '/api/users', [
             'headers' => [
                 'Authorization' => 'Bearer '.$token,
             ],
@@ -69,6 +70,34 @@ class UserTest extends BaseApplication
         ]);
     }
 
+    public function testUserPostCollectionWithLoginWithValidValues(): void
+    {
+        $token = $this->login();
+        $response = static::createClient()->request('POST', '/api/users', [
+            'headers' => [
+                'Authorization' => 'Bearer '.$token,
+            ],
+            'json' => [
+                'firstname' => 'mario',
+                'lastname' => 'bros',
+                'pseudo' => 'mario-bros',
+            ],
+        ]);
+        $this->assertResponseStatusCodeSame(201);
+        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+        $this->assertJsonContains([
+            '@context' => '/api/contexts/User',
+            '@type' => 'User',
+            'firstname' => 'mario',
+            'lastname' => 'bros',
+            'pseudo' => 'mario-bros',
+            'client' => '/api/clients/1',
+        ]);
+
+        $this->assertMatchesRegularExpression('~^/api/users/\d+$~', $response->toArray()['@id']);
+        $this->assertMatchesResourceItemJsonSchema(User::class);
+    }
+
     public function testUserGetItemWithLogin(): void
     {
         $token = $this->login();
@@ -88,5 +117,6 @@ class UserTest extends BaseApplication
         ]);
 
         $this->assertMatchesRegularExpression('~^/api/users/\d+$~', $response->toArray()['@id']);
+        $this->assertMatchesResourceItemJsonSchema(User::class);
     }
 }
