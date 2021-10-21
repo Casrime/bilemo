@@ -1,0 +1,6 @@
+App\Entity\Phone:
+    phone_one: 
+        color: black
+        description: Le meilleur iPhone
+        name: iPhone X
+        price: 1000

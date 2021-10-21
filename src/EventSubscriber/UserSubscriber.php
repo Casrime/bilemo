@@ -25,7 +25,7 @@ class UserSubscriber implements EventSubscriberInterface
 
     public function addUser(ViewEvent $event)
     {
-        if($event->isMasterRequest() && $event->getRequest()->isMethod('POST') && $event->getRequest()->getPathInfo() == "/api/users") {
+        if($event->isMainRequest() && $event->getRequest()->isMethod('POST') && $event->getRequest()->getPathInfo() == "/api/users") {
             $user = $event->getControllerResult();
             $user->setBirthdayDate(new \DateTime('1980-01-01'));
             $user->setClient($this->tokenStorage->getToken()->getUser());

@@ -1,0 +1,14 @@
+App\Entity\User:
+    user_{1..10}:
+        birthdayDate: <((new \DateTimeImmutable())->modify('-30 years'))>
+        client: '@client_one'
+        firstname: '<name()>'
+        lastname: '<name()>'
+        pseudo: '<name()>'
+
+    user_{11..20}:
+        birthdayDate: <((new \DateTimeImmutable())->modify('-30 years'))>
+        client: '@client_two'
+        firstname: '<name()>'
+        lastname: '<name()>'
+        pseudo: '<name()>'
