@@ -2,7 +2,6 @@
 
 namespace App\Tests\Functional;
 
-use App\Entity\User;
 use App\Tests\BaseApplication;
 
 class UserTest extends BaseApplication
@@ -32,6 +31,42 @@ class UserTest extends BaseApplication
         ]);
 
         $this->assertCount(10, $response->toArray()['hydra:member']);
+    }
+
+    public function testUserPostCollectionWithLoginWithoutValues(): void
+    {
+        $token = $this->login();
+        $response = static::createClient()->request('POST', '/api/users', [
+            'headers' => [
+                'Authorization' => 'Bearer '.$token,
+            ],
+            'json' => [],
+        ]);
+        $this->assertResponseStatusCodeSame(422);
+        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+        $this->assertJsonContains([
+            '@context' => '/api/contexts/ConstraintViolationList',
+            '@type' => 'ConstraintViolationList',
+            'hydra:title' => 'An error occurred',
+            'hydra:description' => "firstname: Ce champ ne doit pas être vide\nlastname: Ce champ ne doit pas être vide\npseudo: Ce champ ne doit pas être vide",
+            'violations' => [
+                [
+                    'propertyPath' => 'firstname',
+                    'message'=> 'Ce champ ne doit pas être vide',
+			        'code'=> 'c1051bb4-d103-4f74-8988-acbcafc7fdc3',
+                ],
+                [
+                    'propertyPath' => 'lastname',
+                    'message'=> 'Ce champ ne doit pas être vide',
+                    'code'=> 'c1051bb4-d103-4f74-8988-acbcafc7fdc3',
+                ],
+                [
+                    'propertyPath' => 'pseudo',
+                    'message'=> 'Ce champ ne doit pas être vide',
+                    'code'=> 'c1051bb4-d103-4f74-8988-acbcafc7fdc3',
+                ],
+            ]
+        ]);
     }
 
     public function testUserGetItemWithLogin(): void
