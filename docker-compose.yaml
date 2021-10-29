@@ -1,6 +1,13 @@
 version: "3.4"
 
 services:
+    blackfire:
+        container_name: blackfire
+        env_file: .env.local
+        image: blackfire/blackfire:2
+        ports:
+            - "8307:8307"
+
     database:
         image: postgres:${POSTGRES_VERSION:-13}-alpine
         environment:
