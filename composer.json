@@ -1,4 +1,6 @@
 {
+    "name": "casrime/bilemo",
+    "description": "bilemo project",
     "type": "project",
     "license": "proprietary",
     "require": {
