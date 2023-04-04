@@ -34,7 +34,7 @@ db-drop:				## Delete Database
 						$(CONSOLE) doctrine:database:drop --if-exists --force --env=$(APP_ENV)
 
 db-fixtures:			## Launch fixtures
-						$(if $(filter $(APP_ENV), dev or test),$(CONSOLE) doctrine:fixtures:load --no-interaction --env=$(APP_ENV))
+						$(if $(filter $(APP_ENV), dev or test),$(CONSOLE) hautelook:fixtures:load --no-interaction --env=$(APP_ENV))
 
 db-migrations:			## Execute Doctrine migrations
 						$(CONSOLE) doctrine:migrations:migrate --no-interaction --env=$(APP_ENV)
@@ -105,7 +105,7 @@ twigcs:					## Run twig-cs
 						vendor/bin/twigcs templates
 
 yaml-lint:	            ## Run yaml-lint
-						bin/console lint:yaml config translations
+						bin/console lint:yaml config
 
 rector:					## Run rector
 						vendor/bin/rector --dry-run
