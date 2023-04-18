@@ -20,7 +20,7 @@ class UserTest extends BaseApplication
         $response = static::createClient()->request('GET', '/api/users', [
             'headers' => [
                 'Authorization' => 'Bearer '.$token,
-            ]
+            ],
         ]);
         $this->assertResponseStatusCodeSame(200);
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
@@ -53,20 +53,20 @@ class UserTest extends BaseApplication
             'violations' => [
                 [
                     'propertyPath' => 'firstname',
-                    'message'=> 'Ce champ ne doit pas être vide',
-			        'code'=> 'c1051bb4-d103-4f74-8988-acbcafc7fdc3',
+                    'message' => 'Ce champ ne doit pas être vide',
+                    'code' => 'c1051bb4-d103-4f74-8988-acbcafc7fdc3',
                 ],
                 [
                     'propertyPath' => 'lastname',
-                    'message'=> 'Ce champ ne doit pas être vide',
-                    'code'=> 'c1051bb4-d103-4f74-8988-acbcafc7fdc3',
+                    'message' => 'Ce champ ne doit pas être vide',
+                    'code' => 'c1051bb4-d103-4f74-8988-acbcafc7fdc3',
                 ],
                 [
                     'propertyPath' => 'pseudo',
-                    'message'=> 'Ce champ ne doit pas être vide',
-                    'code'=> 'c1051bb4-d103-4f74-8988-acbcafc7fdc3',
+                    'message' => 'Ce champ ne doit pas être vide',
+                    'code' => 'c1051bb4-d103-4f74-8988-acbcafc7fdc3',
                 ],
-            ]
+            ],
         ]);
     }
 
@@ -104,7 +104,7 @@ class UserTest extends BaseApplication
         $response = static::createClient()->request('GET', '/api/users/1', [
             'headers' => [
                 'Authorization' => 'Bearer '.$token,
-            ]
+            ],
         ]);
         $this->assertResponseStatusCodeSame(200);
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
@@ -112,8 +112,8 @@ class UserTest extends BaseApplication
             '@context' => '/api/contexts/User',
             '@id' => '/api/users/1',
             '@type' => 'User',
-            'id'=> 1,
-            'client'=> '/api/clients/1',
+            'id' => 1,
+            'client' => '/api/clients/1',
         ]);
 
         $this->assertMatchesRegularExpression('~^/api/users/\d+$~', $response->toArray()['@id']);

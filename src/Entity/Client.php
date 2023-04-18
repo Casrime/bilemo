@@ -14,24 +14,33 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource()
+ *
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
+ *
  * @ORM\Table(name="bilemo_client")
+ *
  * @UniqueEntity(fields={"username"}, message="Cet identifiant est déjà utilisé")
  */
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id()
+     *
      * @ORM\GeneratedValue()
+     *
      * @ORM\Column(type="integer")
+     *
      * @Groups({"list"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     *
      * @Groups({"list"})
+     *
      * @Assert\NotBlank(message="Merci de renseigner un pseudo")
+     *
      * @Assert\Length(min="2", max="30", minMessage="Merci de renseigner un minimum de {{ limit }} caractères", maxMessage="Merci de renseigner un maximum de {{ limit }} caractères")
      */
     private $username;
@@ -43,6 +52,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @var string The hashed password
+     *
      * @ORM\Column(type="string")
      */
     private $password;
@@ -63,7 +73,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * The public representation of the user (e.g. a username, an email address, etc.)
+     * The public representation of the user (e.g. a username, an email address, etc.).
      *
      * @see UserInterface
      */

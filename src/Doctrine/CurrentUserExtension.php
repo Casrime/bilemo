@@ -1,4 +1,5 @@
 <?php
+
 // api/src/Doctrine/CurrentUserExtension.php
 
 namespace App\Doctrine;
@@ -39,11 +40,6 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
         $this->addWhere($queryBuilder, $resourceClass);
     }
 
-    /**
-     *
-     * @param QueryBuilder $queryBuilder
-     * @param string       $resourceClass
-     */
     private function addWhere(QueryBuilder $queryBuilder, string $resourceClass)
     {
         $user = $this->tokenStorage->getToken()->getUser();

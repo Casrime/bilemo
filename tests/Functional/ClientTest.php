@@ -19,7 +19,7 @@ class ClientTest extends BaseApplication
         $response = static::createClient()->request('GET', '/api/clients', [
             'headers' => [
                 'Authorization' => 'Bearer '.$token,
-            ]
+            ],
         ]);
         $this->assertResponseStatusCodeSame(200);
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
@@ -39,7 +39,7 @@ class ClientTest extends BaseApplication
         $response = static::createClient()->request('GET', '/api/clients/1', [
             'headers' => [
                 'Authorization' => 'Bearer '.$token,
-            ]
+            ],
         ]);
         $this->assertResponseStatusCodeSame(200);
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
@@ -47,7 +47,7 @@ class ClientTest extends BaseApplication
             '@context' => '/api/contexts/Client',
             '@id' => '/api/clients/1',
             '@type' => 'Client',
-            'id'=> 1,
+            'id' => 1,
         ]);
 
         $this->assertMatchesRegularExpression('~^/api/clients/\d+$~', $response->toArray()['@id']);

@@ -37,9 +37,9 @@ class ClientTest extends BaseApplication
     {
         $user = new User();
         $this->client->addUser($user);
-        $this->assertCount(1,$this->client->getUsers());
+        $this->assertCount(1, $this->client->getUsers());
         $this->client->removeUser($user);
-        $this->assertCount(0,$this->client->getUsers());
+        $this->assertCount(0, $this->client->getUsers());
     }
 
     public function tearDown(): void
