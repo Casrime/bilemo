@@ -8,9 +8,9 @@ use App\Tests\BaseApplication;
 
 class ClientTest extends BaseApplication
 {
-    private $client;
+    private ?\App\Entity\Client $client = null;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->client = new Client();
     }
@@ -42,7 +42,7 @@ class ClientTest extends BaseApplication
         $this->assertCount(0, $this->client->getUsers());
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         $this->client = null;
     }

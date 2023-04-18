@@ -3,59 +3,43 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\PhoneRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ApiResource(
- *     collectionOperations={
- *          "get"={
- *              "method"="GET",
- *              "normalization_context"={"groups"={"list"}}
- *          }
- *     },
- *     itemOperations={"get"={"method"="GET"}})
- *
- * @ORM\Entity(repositoryClass="App\Repository\PhoneRepository")
- *
- * @ORM\Table(name="bilemo_phone")
- */
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'method' => 'GET',
+            'normalization_context' => ['groups' => ['list']],
+        ],
+    ],
+    itemOperations: ['get' => ['method' => 'GET']]
+)]
+#[ORM\Table(name: 'bilemo_phone')]
+#[ORM\Entity(repositoryClass: PhoneRepository::class)]
 class Phone
 {
-    /**
-     * @ORM\Id()
-     *
-     * @ORM\GeneratedValue()
-     *
-     * @ORM\Column(type="integer")
-     *
-     * @Groups({"list"})
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    #[Groups(['list'])]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     *
-     * @Groups({"list"})
-     */
-    private $name;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    #[Groups(['list'])]
+    private ?string $name = null;
 
-    /**
-     * @ORM\Column(type="integer")
-     *
-     * @Groups({"list"})
-     */
-    private $price;
+    #[ORM\Column(type: Types::INTEGER)]
+    #[Groups(['list'])]
+    private ?int $price = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $color;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $color = null;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $description;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $description = null;
 
     public function getId(): ?int
     {

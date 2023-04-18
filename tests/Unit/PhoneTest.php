@@ -7,9 +7,9 @@ use App\Tests\BaseApplication;
 
 class PhoneTest extends BaseApplication
 {
-    private $phone;
+    private ?\App\Entity\Phone $phone = null;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->phone = new Phone();
     }
@@ -39,7 +39,7 @@ class PhoneTest extends BaseApplication
         $this->assertEquals('Hello from Bilemo', $this->phone->getDescription());
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         $this->phone = null;
     }
