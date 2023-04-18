@@ -1,0 +1,13 @@
+{
+    "name": "Bilemo",
+    "short_name": "📱",
+    "description": "a bilemo api.",
+    "start_url": "https://bilemo.abdounikarim.com",
+    "orientation": "landscape",
+    "display": "fullscreen",
+    "background_color": "#fff",
+    "theme_color": "#e3f2fd",
+    "icons": [
+        { "src": "favicon.ico", "sizes": "16x16" }
+    ]
+}
