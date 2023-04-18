@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -12,55 +14,38 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ApiResource()
- *
- * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
- *
- * @ORM\Table(name="bilemo_client")
- *
- * @UniqueEntity(fields={"username"}, message="Cet identifiant est déjà utilisé")
- */
+#[ApiResource]
+#[ORM\Table(name: 'bilemo_client')]
+#[ORM\Entity(repositoryClass: ClientRepository::class)]
+#[UniqueEntity(fields: ['username'], message: 'Cet identifiant est déjà utilisé')]
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    /**
-     * @ORM\Id()
-     *
-     * @ORM\GeneratedValue()
-     *
-     * @ORM\Column(type="integer")
-     *
-     * @Groups({"list"})
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    #[Groups(['list'])]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     *
-     * @Groups({"list"})
-     *
-     * @Assert\NotBlank(message="Merci de renseigner un pseudo")
-     *
-     * @Assert\Length(min="2", max="30", minMessage="Merci de renseigner un minimum de {{ limit }} caractères", maxMessage="Merci de renseigner un maximum de {{ limit }} caractères")
-     */
-    private $username;
+    #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
+    #[Groups(['list'])]
+    #[Assert\NotBlank(message: 'Merci de renseigner un pseudo')]
+    #[Assert\Length(min: 2, max: 30, minMessage: 'Merci de renseigner un minimum de {{ limit }} caractères', maxMessage: 'Merci de renseigner un maximum de {{ limit }} caractères')]
+    private ?string $username = null;
 
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
+    #[ORM\Column(type: Types::JSON)]
+    private array $roles = [];
 
     /**
      * @var string The hashed password
-     *
-     * @ORM\Column(type="string")
      */
-    private $password;
+    #[ORM\Column(type: Types::STRING)]
+    private string $password;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="client")
+     * @var Collection<int, User>|User[]
      */
-    private $users;
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: User::class)]
+    private Collection $users;
 
     public function __construct()
     {
@@ -146,9 +131,6 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     {
     }
 
-    /**
-     * @return Collection|User[]
-     */
     public function getUsers(): Collection
     {
         return $this->users;

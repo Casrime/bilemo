@@ -1,7 +1,5 @@
 <?php
 
-// api/src/Doctrine/CurrentUserExtension.php
-
 namespace App\Doctrine;
 
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
@@ -11,17 +9,11 @@ use App\Entity\Client;
 use App\Entity\User;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-final class CurrentUserExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
+final readonly class CurrentUserExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
-    private $tokenStorage;
-    private $authorizationChecker;
-
-    public function __construct(TokenStorageInterface $tokenStorage, AuthorizationCheckerInterface $checker)
+    public function __construct(private TokenStorageInterface $tokenStorage)
     {
-        $this->tokenStorage = $tokenStorage;
-        $this->authorizationChecker = $checker;
     }
 
     /**

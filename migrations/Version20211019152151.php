@@ -20,7 +20,7 @@ final class Version20211019152151 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf('postgresql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'postgresql\'.');
+        $this->abortIf('postgresql' !== $this->connection->getDatabasePlatform()->getName(), "Migration can only be executed safely on 'postgresql'.");
 
         $this->addSql('CREATE SEQUENCE bilemo_client_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE bilemo_phone_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
@@ -36,7 +36,7 @@ final class Version20211019152151 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf('postgresql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'postgresql\'.');
+        $this->abortIf('postgresql' !== $this->connection->getDatabasePlatform()->getName(), "Migration can only be executed safely on 'postgresql'.");
 
         $this->addSql('CREATE SCHEMA public');
         $this->addSql('ALTER TABLE bilemo_user DROP CONSTRAINT FK_69C6AC2519EB6921');
