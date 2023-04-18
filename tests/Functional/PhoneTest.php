@@ -20,7 +20,7 @@ class PhoneTest extends BaseApplication
         $response = static::createClient()->request('GET', '/api/phones', [
             'headers' => [
                 'Authorization' => 'Bearer '.$token,
-            ]
+            ],
         ]);
         $this->assertResponseStatusCodeSame(200);
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
@@ -41,7 +41,7 @@ class PhoneTest extends BaseApplication
         $response = static::createClient()->request('GET', '/api/phones/1', [
             'headers' => [
                 'Authorization' => 'Bearer '.$token,
-            ]
+            ],
         ]);
         $this->assertResponseStatusCodeSame(200);
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
@@ -49,11 +49,11 @@ class PhoneTest extends BaseApplication
             '@context' => '/api/contexts/Phone',
             '@id' => '/api/phones/1',
             '@type' => 'Phone',
-            'id'=> 1,
-	        'name'=> 'iPhone X',
-	        'price'=> 1000,
-	        'color'=> 'black',
-	        'description'=> 'Le meilleur iPhone',
+            'id' => 1,
+            'name' => 'iPhone X',
+            'price' => 1000,
+            'color' => 'black',
+            'description' => 'Le meilleur iPhone',
         ]);
 
         $this->assertMatchesRegularExpression('~^/api/phones/\d+$~', $response->toArray()['@id']);

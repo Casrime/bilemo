@@ -15,27 +15,34 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          }
  *     },
  *     itemOperations={"get"={"method"="GET"}})
+ *
  * @ORM\Entity(repositoryClass="App\Repository\PhoneRepository")
+ *
  * @ORM\Table(name="bilemo_phone")
  */
 class Phone
 {
     /**
      * @ORM\Id()
+     *
      * @ORM\GeneratedValue()
+     *
      * @ORM\Column(type="integer")
+     *
      * @Groups({"list"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Groups({"list"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
+     *
      * @Groups({"list"})
      */
     private $price;

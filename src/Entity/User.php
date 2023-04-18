@@ -4,8 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -23,40 +23,55 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "delete"={"method"="DELETE"}
  *     }
  * )
+ *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ *
  * @ORM\Table(name="bilemo_user")
+ *
  * @UniqueEntity(fields={"pseudo"}, message="Cet identifiant est déjà utilisé")
  */
 class User
 {
     /**
      * @ORM\Id()
+     *
      * @ORM\GeneratedValue()
+     *
      * @ORM\Column(type="integer")
+     *
      * @Groups({"list"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Groups({"list", "add"})
+     *
      * @Assert\NotBlank(message="Ce champ ne doit pas être vide")
+     *
      * @Assert\Length(min="2", max="30", minMessage="Merci de renseigner un minimum de {{ limit }} caractères", maxMessage="Merci de renseigner un maximum de {{ limit }} caractères")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Groups({"list", "add"})
+     *
      * @Assert\NotBlank(message="Ce champ ne doit pas être vide")
+     *
      * @Assert\Length(min="2", max="30", minMessage="Merci de renseigner un minimum de {{ limit }} caractères", maxMessage="Merci de renseigner un maximum de {{ limit }} caractères")
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Groups({"list", "add"})
+     *
      * @Assert\NotBlank(message="Ce champ ne doit pas être vide")
+     *
      * @Assert\Length(min="2", max="30", minMessage="Merci de renseigner un minimum de {{ limit }} caractères", maxMessage="Merci de renseigner un maximum de {{ limit }} caractères")
      */
     private $pseudo;
@@ -68,6 +83,7 @@ class User
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="users")
+     *
      * @Groups({"list", "add"})
      */
     private $client;
