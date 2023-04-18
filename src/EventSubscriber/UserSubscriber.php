@@ -23,7 +23,7 @@ class UserSubscriber implements EventSubscriberInterface
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function addUser(ViewEvent $event)
+    public function addUser(ViewEvent $event): void
     {
         if ($event->isMainRequest() && $event->getRequest()->isMethod('POST') && '/api/users' == $event->getRequest()->getPathInfo()) {
             $user = $event->getControllerResult();
