@@ -1,0 +1,15 @@
+@startuml
+autonumber
+title       "Client" accessing to /api/users
+actor       "Client"
+participant Api
+database    Database
+
+ref over "Client", Api, Database
+    /api/login_check
+end ref
+"Client" -> Api: GET /api/users
+Api -> Database: get users for logged in client
+Database --> Api: return users for logged in client
+"Client" <-- Api: Render /api/users with users for logged in client with 200 status code
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+autonumber
+title       "Client" accessing to /api/users/1
+actor       "Client"
+participant Api
+database    Database
+
+ref over "Client", Api, Database
+    /api/login_check
+end ref
+"Client" -> Api: DELETE /api/users/1
+Api -> Database: delete user for the logged in client
+alt delete user for the logged in client
+    Database -> Api: delete user linked to the logged in client
+    Api -> Client: /api/users/1 with 204 status code
+else user not found or not linked to the logged in client
+    Api -> Client: /api/users/1 with 404 status code
+end
+
+@enduml

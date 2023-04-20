@@ -1,0 +1,21 @@
+@startuml
+autonumber
+title       "Client" accessing to /api/phones/1
+actor       "Client"
+participant Api
+database    Database
+
+ref over "Client", Api, Database
+    /api/login_check
+end ref
+"Client" -> Api: GET /api/phones/1
+Api -> Database: get phone with id = 1
+alt Phone found
+    Database --> Api: return phones with id = 1
+    "Client" <-- Api: return /api/phones with 200 status code
+else Phone not found
+    Database -> Api: phone not found
+    Api -> "Client": return /api/phones with 404 status code
+end
+
+@enduml

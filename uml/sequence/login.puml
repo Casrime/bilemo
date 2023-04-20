@@ -1,0 +1,19 @@
+@startuml
+autonumber
+title       "Client" wants to log in
+actor       "Client"
+participant Api
+database    Database
+
+"Client" -> Api: POST /api/login_check
+Api -> Api: hash password
+Api -> Database: send values to database
+Database -> Database: checks credentials
+alt Client logged in
+    Database -> Api: Client found
+    Api -> "Client": Return token
+else authentication error
+    Database -> Api: Client not found
+    Api -> "Client": Return bad credentials
+end
+@enduml
