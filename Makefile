@@ -129,6 +129,24 @@ coverage-reset:			export APP_ENV=test
 coverage-reset:			## Recreate database, launch migrations, load fixtures and execute tests with code coverage
 coverage-reset: 		db-reset coverage
 
+# Generate
+.PHONY: generate-ssh-keys generate-token
+
+generate-ssh-keys:
+						@mkdir -p config/jwt
+						@openssl genrsa -out config/jwt/private.pem -aes256 4096
+						@openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
+
+generate-token:
+						@clear
+						@read -p "Username: " USERNAME; \
+						read -s -p "Password: " PASSWORD; \
+						echo "\n"; \
+						curl -X POST https://localhost/api/login_check \
+							 -H "Content-Type: application/json" \
+							 -d '{"username":"'$$USERNAME'", "password":"'$$PASSWORD'"}' \
+							 --insecure
+
 # Help
 .PHONY: help
 
