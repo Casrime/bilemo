@@ -1,37 +1,80 @@
-**Installation du projet**
+[![SymfonyInsight](https://insight.symfony.com/projects/b198abbb-7d2f-4234-91ae-cfda006620c7/big.svg)](https://insight.symfony.com/projects/b198abbb-7d2f-4234-91ae-cfda006620c7)
 
-Installer les dépendances du projet :
+Bilemo
+========================
 
-```composer install```
+Requirements
+------------
 
-Lancer les commandes suivantes : 
+* PHP 8.0 or higher;
+* PDO-SQLite PHP extension enabled;
+* and the [usual Symfony application requirements][1].
 
-```bin/console doctrine:database:create```
+Installation
+------------
+You need to install :
+- [Docker Engine][2]
+- [Docker Compose][3]
 
-```bin/console doctrine:migrations:migrate```
-
-```bin/console doctrine:fixtures:load```
-
-Générer les clés SSH
-
-```mkdir -p config/jwt```
-
-```openssl genrsa -out config/jwt/private.pem -aes256 4096```
-
-```openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem```
-
-Saisissez votre passphrase dans le fichier ```.env```
-
-**Effectuez une requête pour se connecter :**
-
-```curl -X POST -H "Content-Type: application/json" http://localhost:8000/api/login_check -d '{"username":"sfr", "password": "pass"}'```
-
-Vous devriez avoir ceci qui s'affiche dans votre console : 
-
+Install the project :
+```bash
+$ make install
 ```
+
+Generate SSH Keys :
+```bash
+$ make generate-ssh-keys
+```
+
+Generate Token :
+```bash
+$ make generate-token
+```
+
+You should have a response like this from the CLI :
+```json
 {
    "token" : "yourtoken"
 }
 ```
 
-À vous de jouer
+Now, use this token to authenticate yourself in the API.
+
+Usage
+------------
+Boot containers :
+```bash
+$ make dc-up
+```
+
+To interact with the PHP container :
+```bash
+$ make dc-exec
+```
+
+Create database, run migrations and load fixtures :
+```bash
+$ make db-reset
+```
+
+Tests
+------------
+
+Execute this command to run tests:
+```bash
+$ make tests
+```
+
+Reset tests
+------------
+```bash
+$ make tests-reset
+```
+
+Diagrams
+------------
+[Link](diagrams.md)
+
+[1]: https://symfony.com/doc/current/reference/requirements.html
+[2]: https://docs.docker.com/installation/
+[3]: https://docs.docker.com/compose/
