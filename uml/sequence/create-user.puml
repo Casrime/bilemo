@@ -1,0 +1,21 @@
+@startuml
+autonumber
+title       "Client" accessing to /api/users
+actor       "Client"
+participant Api
+database    Database
+
+ref over "Client", Api, Database
+    /api/login_check
+end ref
+"Client" -> Api: POST /api/users with json data
+Api -> Api : check submitted data
+alt data are valid
+    Api -> Database: insert new user
+    Database -> Api: ok
+    Api -> Client: /api/users with 201 status code
+else data are invalid
+    Api -> Client: /api/users with 422 status code
+end
+
+@enduml

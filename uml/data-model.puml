@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+object client {
+    -id: INTEGER [PK]
+    -username: VARCHAR [180], unique
+    -roles: JSON
+    -password: VARCHAR [255]
+}
+
+object phone {
+    -id: INTEGER [PK]
+    -name: VARCHAR [255]
+    -price: INTEGER
+    -color: VARCHAR [255]
+    -description: TEXT
+}
+
+object user {
+   -id: INTEGER [PK]
+   -firstname: VARCHAR [255]
+   -lastname: VARCHAR [255]
+   -pseudo: VARCHAR [255]
+   -birthday_date: DATE
+   -client_id: INTEGER [FK]
+}
+
+client - user
+
+@enduml

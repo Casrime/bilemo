@@ -1,0 +1,64 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Client {
+    -id
+    -username
+    -roles
+    -password
+    -users
+    +getId()
+    +getUserIdentifier()
+    +getUsername()
+    +setUsername()
+    +getRoles()
+    +setRoles()
+    +getPassword()
+    +setPassword()
+    +getSalt()
+    +eraseCredentials()
+    +getUsers()
+    +addUser()
+    +removeUser()
+}
+
+class Phone {
+    -id
+    -name
+    -price
+    -color
+    -description
+    +getId()
+    +getName()
+    +setName()
+    +getPrice()
+    +setPrice()
+    +getColor()
+    +setColor()
+    +getDescription()
+    +setDescription()
+}
+
+class User {
+    -id
+    -firstname
+    -lastname
+    -pseudo
+    -birthdayDate
+    -client
+    +getId()
+    +getFirstname()
+    +setFirstname()
+    +getLastname()
+    +setLastname()
+    +getPseudo()
+    +setPseudo()
+    +getBirthdayDate()
+    +setBirthdayDate()
+    +getClient()
+    +setClient()
+}
+
+Client -{ User
+
+@enduml
