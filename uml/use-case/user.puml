@@ -3,10 +3,15 @@ left to right direction
 actor Client as client #dodgerblue;line:dodgerblue;line.bold;text:black
 
 package User #crimson;line:red;line.bold;text:white {
+  usecase "Add new users" as addUsers
   usecase "Show his own users" as showUsers
   usecase "Show his own user detail" as showUser
+  usecase "Delete users" as deleteUsers
 }
 
+client --> addUsers
 client --> showUsers
 client --> showUser
+client --> deleteUsers
+
 @enduml

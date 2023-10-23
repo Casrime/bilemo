@@ -12,10 +12,10 @@ end ref
 Api -> Database: get user with id 1 associated to the logged client
 alt user found for the logged client
     Database --> Api: return users with id = 1
-    "Client" <-- Api: return /api/users with 200 status code
+    "Client" <-- Api: return /api/users/1 with 200 status code
 else user not found
     Database -> Api: user not found
-    Api -> "Client": return /api/users with 404 status code
+    Api -> "Client": return /api/users/1 with 404 status code
 end
 
 @enduml
