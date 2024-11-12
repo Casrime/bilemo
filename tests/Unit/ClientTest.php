@@ -8,7 +8,7 @@ use App\Tests\BaseApplication;
 
 class ClientTest extends BaseApplication
 {
-    private ?\App\Entity\Client $client = null;
+    private ?Client $client = null;
 
     protected function setUp(): void
     {

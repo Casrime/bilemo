@@ -16,18 +16,12 @@ final readonly class CurrentUserExtension implements QueryCollectionExtensionInt
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null): void
+    public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, ?string $operationName = null): void
     {
         $this->addWhere($queryBuilder, $resourceClass);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function applyToItem(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, array $identifiers, string $operationName = null, array $context = []): void
+    public function applyToItem(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, array $identifiers, ?string $operationName = null, array $context = []): void
     {
         $this->addWhere($queryBuilder, $resourceClass);
     }

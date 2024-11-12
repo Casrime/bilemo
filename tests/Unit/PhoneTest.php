@@ -7,7 +7,7 @@ use App\Tests\BaseApplication;
 
 class PhoneTest extends BaseApplication
 {
-    private ?\App\Entity\Phone $phone = null;
+    private ?Phone $phone = null;
 
     protected function setUp(): void
     {
