@@ -63,7 +63,7 @@ jobs:
               run: bin/console doctrine:migrations:migrate --no-interaction --env=test
             
             - name: Launch fixtures
-              run: bin/console doctrine:fixtures:load --no-interaction --env=test
+              run: bin/console hautelook:fixtures:load --no-interaction --env=test
             
             - name: Run phpunit
               run: SYMFONY_DEPRECATIONS_HELPER=disabled vendor/bin/phpunit
