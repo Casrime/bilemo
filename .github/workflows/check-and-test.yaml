@@ -1,4 +1,4 @@
-name: PHP CS Fixer
+name: Check and Test
 on: [push]
 
 env:
@@ -6,7 +6,7 @@ env:
 
 jobs:
     tests:
-        name: PHP CS Fixer
+        name: Check and Test
         # https://hub.docker.com/_/ubuntu/
         runs-on: ubuntu-latest
         services:
@@ -52,5 +52,11 @@ jobs:
             - name: Install Composer dependencies
               run: composer install
 
-            - name: Run php-cs-fixer
-              run: PHP_CS_FIXER_IGNORE_ENV=true vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --diff --dry-run --verbose
+            - name: Boot project
+              run: make install
+
+            - name: Run checks
+              run: make checks
+
+            - name: Run tests
+              run: make tests
