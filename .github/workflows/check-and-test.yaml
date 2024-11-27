@@ -1,11 +1,30 @@
 name: Check and Test
 on: [push]
 
+env:
+    DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/bilemo?serverVersion=13&charset=utf8
+
 jobs:
     tests:
         name: Check and Test
         # https://hub.docker.com/_/ubuntu/
         runs-on: ubuntu-latest
+        services:
+            # https://hub.docker.com/_/postgres/
+            postgresql:
+                image: postgres:13
+                env:
+                    POSTGRES_USER: postgres
+                    POSTGRES_PASSWORD: postgres
+                    POSTGRES_PORT: 5432
+                    POSTGRES_DB: bilemo
+                ports:
+                    - 5432:5432
+                options: >-
+                    --health-cmd pg_isready
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 5
         strategy:
             fail-fast: true
             matrix:
@@ -33,11 +52,18 @@ jobs:
             - name: Install Composer dependencies
               run: composer install
 
-            - name: Boot project
-              run: make install
-
             - name: Run checks
               run: make checks
 
-            - name: Run tests
-              run: make tests
+            ## —— Tests ✅ ———————————————————————————————————————————————————————————
+            - name: Create database
+              run: bin/console doctrine:database:create --if-not-exists --env=test
+
+            - name: Run migrations
+              run: bin/console doctrine:migrations:migrate --no-interaction --env=test
+            
+            - name: Launch fixtures
+              run: bin/console doctrine:fixtures:load --no-interaction --env=test
+            
+            - name: Run phpunit
+              run: SYMFONY_DEPRECATIONS_HELPER=disabled vendor/bin/phpunit
