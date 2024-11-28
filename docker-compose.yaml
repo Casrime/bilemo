@@ -9,7 +9,7 @@ services:
             - "8307:8307"
 
     database:
-        image: postgres:${POSTGRES_VERSION:-13}-alpine
+        image: postgres:${POSTGRES_VERSION:-17}-alpine
         environment:
             POSTGRES_DB: ${POSTGRES_DB:-app}
             # You should definitely change the password in production
@@ -23,7 +23,7 @@ services:
             context: .
             target: symfony_php
         environment:
-            DATABASE_URL: postgresql://${POSTGRES_USER:-symfony}:${POSTGRES_PASSWORD:-ChangeMe}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-13}
+            DATABASE_URL: postgresql://${POSTGRES_USER:-symfony}:${POSTGRES_PASSWORD:-ChangeMe}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-17}
         restart: unless-stopped
         volumes:
             - php_socket:/var/run/php

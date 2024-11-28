@@ -2,7 +2,7 @@ name: Check and Test
 on: [push]
 
 env:
-    DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/bilemo?serverVersion=13&charset=utf8
+    DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/bilemo?serverVersion=17&charset=utf8
 
 jobs:
     tests:
