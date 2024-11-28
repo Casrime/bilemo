@@ -57,7 +57,7 @@ jobs:
 
             # —— Symfony console 🐙 ——————————————————————————————————————————————————
             - name: Generate SSH Keys
-              run: make generate-ssh-keys
+              run: bin/console lexik:jwt:generate-keypair -n
 
             # —— Tests ✅ ———————————————————————————————————————————————————————————
             - name: Create database
