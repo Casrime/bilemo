@@ -1,4 +1,4 @@
-name: PHP CS Fixer
+name: Check and Test
 on: [push]
 
 env:
@@ -6,7 +6,7 @@ env:
 
 jobs:
     tests:
-        name: PHP CS Fixer
+        name: Check and Test
         # https://hub.docker.com/_/ubuntu/
         runs-on: ubuntu-latest
         services:
@@ -52,5 +52,22 @@ jobs:
             - name: Install Composer dependencies
               run: composer install
 
-            - name: Run php-cs-fixer
-              run: PHP_CS_FIXER_IGNORE_ENV=true vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --diff --dry-run --verbose
+            - name: Run checks
+              run: make checks
+
+            # —— Symfony console 🐙 ——————————————————————————————————————————————————
+            - name: Generate SSH Keys
+              run: bin/console lexik:jwt:generate-keypair -n
+
+            # —— Tests ✅ ———————————————————————————————————————————————————————————
+            - name: Create database
+              run: bin/console doctrine:database:create --if-not-exists --env=test
+
+            - name: Run migrations
+              run: bin/console doctrine:migrations:migrate --no-interaction --env=test
+            
+            - name: Launch fixtures
+              run: bin/console hautelook:fixtures:load --no-interaction --env=test
+            
+            - name: Run phpunit
+              run: SYMFONY_DEPRECATIONS_HELPER=disabled vendor/bin/phpunit
