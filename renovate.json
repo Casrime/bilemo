@@ -3,7 +3,9 @@
   "extends": [
     "config:recommended"
   ],
-  "prHourlyLimit": 50,
+  "prHourlyLimit": 10,
   "separateMajorMinor": true,
-  "separateMultipleMajor": true
+  "separateMultipleMajor": true,
+  "automerge": true,
+  "rebaseWhen": "auto"
 }
