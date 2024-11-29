@@ -3,5 +3,7 @@
   "extends": [
     "config:recommended"
   ],
-  "prHourlyLimit": 50
+  "prHourlyLimit": 50,
+  "separateMajorMinor": true,
+  "separateMultipleMajor": true
 }
