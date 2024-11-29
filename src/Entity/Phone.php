@@ -2,20 +2,19 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\PhoneRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ApiResource(
-    collectionOperations: [
-        'get' => [
-            'method' => 'GET',
-            'normalization_context' => ['groups' => ['list']],
-        ],
-    ],
-    itemOperations: ['get' => ['method' => 'GET']]
+    operations: [
+        new GetCollection(normalizationContext: ['groups' => ['list']]),
+        new Get(),
+    ]
 )]
 #[ORM\Table(name: 'bilemo_phone')]
 #[ORM\Entity(repositoryClass: PhoneRepository::class)]
