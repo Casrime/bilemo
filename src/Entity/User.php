@@ -2,7 +2,11 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,19 +15,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
-    collectionOperations: [
-        'get' => [
-            'method' => 'GET',
-            'normalization_context' => ['groups' => ['list']],
-        ],
-        'post' => [
-            'method' => 'POST',
-            'denormalization_context' => ['groups' => ['add']],
-        ],
-    ],
-    itemOperations: [
-        'get' => ['method' => 'GET'],
-        'delete' => ['method' => 'DELETE'],
+    operations: [
+        new GetCollection(normalizationContext: ['groups' => ['list']]),
+        new Post(denormalizationContext: ['groups' => ['add']]),
+        new Get(),
+        new Delete(),
     ]
 )]
 #[ORM\Table(name: 'bilemo_user')]
