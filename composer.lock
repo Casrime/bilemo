@@ -7610,23 +7610,23 @@
         },
         {
             "name": "hautelook/alice-bundle",
-            "version": "2.14.1",
+            "version": "2.15.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/theofidry/AliceBundle.git",
-                "reference": "fe47c6d1d68f1d97b124784bc9266ae7a1b75ca0"
+                "reference": "e33d72e4df48b846dd5fb99039dbcfc5401daf2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/theofidry/AliceBundle/zipball/fe47c6d1d68f1d97b124784bc9266ae7a1b75ca0",
-                "reference": "fe47c6d1d68f1d97b124784bc9266ae7a1b75ca0",
+                "url": "https://api.github.com/repos/theofidry/AliceBundle/zipball/e33d72e4df48b846dd5fb99039dbcfc5401daf2c",
+                "reference": "e33d72e4df48b846dd5fb99039dbcfc5401daf2c",
                 "shasum": ""
             },
             "require": {
-                "doctrine/data-fixtures": "^1.7",
+                "doctrine/data-fixtures": "^1.7 || ^2.0",
                 "doctrine/doctrine-bundle": "^2.11.3",
                 "doctrine/orm": "^3.1",
-                "doctrine/persistence": "^3.3.1",
+                "doctrine/persistence": "^3.3.1 || ^4.0",
                 "php": "^8.2",
                 "psr/log": "^1.0 || ^2.0 || ^3.0",
                 "symfony/finder": "^6.4 || ^7.0",
@@ -7642,10 +7642,10 @@
             },
             "type": "symfony-bundle",
             "extra": {
+                "bin-dir": "bin",
                 "branch-alias": {
                     "dev-master": "2.x-dev"
                 },
-                "bin-dir": "bin",
                 "sort-packages": true
             },
             "autoload": {
@@ -7678,9 +7678,9 @@
             ],
             "support": {
                 "issues": "https://github.com/theofidry/AliceBundle/issues",
-                "source": "https://github.com/theofidry/AliceBundle/tree/2.14.1"
+                "source": "https://github.com/theofidry/AliceBundle/tree/2.15.1"
             },
-            "time": "2024-07-05T13:48:26+00:00"
+            "time": "2025-03-27T09:27:25+00:00"
         },
         {
             "name": "icecave/parity",
