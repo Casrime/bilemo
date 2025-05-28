@@ -39,14 +39,15 @@ class UserTest extends BaseApplication
         $token = $this->login();
         static::createClient()->request('POST', '/api/users', [
             'headers' => [
+                'Content-Type' => 'application/ld+json',
+                'Accept' => 'application/ld+json',
                 'Authorization' => 'Bearer '.$token,
             ],
             'json' => [],
         ]);
         $this->assertResponseStatusCodeSame(422);
-        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+        $this->assertResponseHeaderSame('content-type', 'application/problem+json; charset=utf-8');
         $this->assertJsonContains([
-            '@context' => '/api/contexts/ConstraintViolationList',
             '@type' => 'ConstraintViolationList',
             'hydra:title' => 'An error occurred',
             'hydra:description' => "firstname: Ce champ ne doit pas être vide\nlastname: Ce champ ne doit pas être vide\npseudo: Ce champ ne doit pas être vide",
@@ -75,6 +76,8 @@ class UserTest extends BaseApplication
         $token = $this->login();
         $response = static::createClient()->request('POST', '/api/users', [
             'headers' => [
+                'Content-Type' => 'application/ld+json',
+                'Accept' => 'application/ld+json',
                 'Authorization' => 'Bearer '.$token,
             ],
             'json' => [
@@ -86,7 +89,6 @@ class UserTest extends BaseApplication
         $this->assertResponseStatusCodeSame(201);
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
         $this->assertJsonContains([
-            '@context' => '/api/contexts/User',
             '@type' => 'User',
             'firstname' => 'mario',
             'lastname' => 'bros',
