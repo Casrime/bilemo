@@ -42,7 +42,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     private string $password;
 
     /**
-     * @var Collection<int, User>|User[]
+     * @var Collection<int, User>
      */
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: User::class)]
     private Collection $users;
@@ -55,6 +55,11 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
     }
 
     /**
