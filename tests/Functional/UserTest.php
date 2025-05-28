@@ -27,11 +27,11 @@ class UserTest extends BaseApplication
         $this->assertJsonContains([
             '@context' => '/api/contexts/User',
             '@id' => '/api/users',
-            '@type' => 'hydra:Collection',
-            'hydra:totalItems' => 10,
+            '@type' => 'Collection',
+            'totalItems' => 10,
         ]);
 
-        $this->assertCount(10, $response->toArray()['hydra:member']);
+        $this->assertCount(10, $response->toArray()['member']);
     }
 
     public function testUserPostCollectionWithLoginWithoutValues(): void
@@ -48,9 +48,9 @@ class UserTest extends BaseApplication
         $this->assertResponseStatusCodeSame(422);
         $this->assertResponseHeaderSame('content-type', 'application/problem+json; charset=utf-8');
         $this->assertJsonContains([
-            '@type' => 'ConstraintViolationList',
-            'hydra:title' => 'An error occurred',
-            'hydra:description' => "firstname: Ce champ ne doit pas être vide\nlastname: Ce champ ne doit pas être vide\npseudo: Ce champ ne doit pas être vide",
+            '@type' => 'ConstraintViolation',
+            'title' => 'An error occurred',
+            'description' => "firstname: Ce champ ne doit pas être vide\nlastname: Ce champ ne doit pas être vide\npseudo: Ce champ ne doit pas être vide",
             'violations' => [
                 [
                     'propertyPath' => 'firstname',
