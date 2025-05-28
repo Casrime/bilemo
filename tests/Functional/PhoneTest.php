@@ -27,11 +27,11 @@ class PhoneTest extends BaseApplication
         $this->assertJsonContains([
             '@context' => '/api/contexts/Phone',
             '@id' => '/api/phones',
-            '@type' => 'hydra:Collection',
-            'hydra:totalItems' => 1,
+            '@type' => 'Collection',
+            'totalItems' => 1,
         ]);
 
-        $this->assertCount(1, $response->toArray()['hydra:member']);
+        $this->assertCount(1, $response->toArray()['member']);
         $this->assertMatchesResourceCollectionJsonSchema(Phone::class);
     }
 

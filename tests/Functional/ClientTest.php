@@ -26,11 +26,11 @@ class ClientTest extends BaseApplication
         $this->assertJsonContains([
             '@context' => '/api/contexts/Client',
             '@id' => '/api/clients',
-            '@type' => 'hydra:Collection',
-            'hydra:totalItems' => 2,
+            '@type' => 'Collection',
+            'totalItems' => 2,
         ]);
 
-        $this->assertCount(2, $response->toArray()['hydra:member']);
+        $this->assertCount(2, $response->toArray()['member']);
     }
 
     public function testClientGetItemWithLogin(): void
