@@ -43,15 +43,12 @@ db-reset:				## Reset Database
 db-reset:				db-drop db-create db-migrations db-fixtures
 
 # Docker Compose commands
-.PHONY: dc-build dc-down dc-exec dc-start dc-stop dc-up dc-prod
+.PHONY: dc-build dc-build-no-cache dc-down dc-exec dc-start dc-stop dc-up dc-prod
 dc-build:				## Build docker images
 						$(DOCKER_COMPOSE) build --pull
 
-dc-build-debug:			## Build docker images
-						$(DOCKER_COMPOSE) -f docker-compose.yaml -f docker-compose.debug.yaml build --pull
-
-dc-debug:				## Initialize the project with Docker in debug mode
-						$(DOCKER_COMPOSE) -f docker-compose.yaml -f docker-compose.debug.yaml up -d
+dc-build-no-cache:				## Build docker images
+						$(DOCKER_COMPOSE) build --pull --no-cache
 
 dc-down:				## Delete containers and volumes
 						$(DOCKER_COMPOSE) down --remove-orphans --volumes
@@ -69,7 +66,7 @@ dc-up:					## Initialize the project with Docker
 						$(DOCKER_COMPOSE) up -d
 
 dc-prod:				## Initialize the project with Docker in prod APP_ENVironment
-						$(DOCKER_COMPOSE) -f docker-compose.yaml -f docker-compose.prod.yaml up -d
+						$(DOCKER_COMPOSE) -f compose.yaml -f compose.prod.yaml up -d
 
 dc-logs:				CONTAINER_NAME := $(word 2, $(MAKECMDGOALS))
 dc-logs:				## Interact with a container
