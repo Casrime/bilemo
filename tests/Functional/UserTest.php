@@ -56,7 +56,6 @@ class UserTest extends BaseApplication
             'firstname' => 'mario',
             'lastname' => 'bros',
             'pseudo' => 'mario-bros',
-            'client' => '/api/clients/1',
         ]);
 
         $this->assertMatchesRegularExpression('~^/api/users/\d+$~', $response->toArray()['@id']);
