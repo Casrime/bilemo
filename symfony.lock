@@ -1,11 +1,11 @@
 {
-    "api-platform/core": {
-        "version": "3.4",
+    "api-platform/symfony": {
+        "version": "4.1",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "3.3",
-            "ref": "74b45ac570c57eb1fbe56c984091a9ff87e18bab"
+            "version": "4.0",
+            "ref": "e9952e9f393c2d048f10a78f272cd35e807d972b"
         },
         "files": [
             "config/packages/api_platform.yaml",
@@ -14,12 +14,12 @@
         ]
     },
     "dama/doctrine-test-bundle": {
-        "version": "7.3",
+        "version": "8.3",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "main",
-            "version": "7.2",
-            "ref": "896306d79d4ee143af9eadf9b09fd34a8c391b70"
+            "version": "8.3",
+            "ref": "dfc51177476fb39d014ed89944cde53dc3326d23"
         },
         "files": [
             "config/packages/dama_doctrine_test_bundle.yaml"
@@ -154,15 +154,16 @@
         }
     },
     "phpunit/phpunit": {
-        "version": "9.6",
+        "version": "12.1",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "9.3",
-            "ref": "a6249a6c4392e9169b87abf93225f7f9f59025e6"
+            "version": "11.1",
+            "ref": "c6658a60fc9d594805370eacdf542c3d6b5c0869"
         },
         "files": [
             ".env.test",
+            "bin/phpunit",
             "phpunit.xml.dist",
             "tests/bootstrap.php"
         ]
@@ -193,14 +194,15 @@
         ]
     },
     "symfony/framework-bundle": {
-        "version": "6.4",
+        "version": "7.3",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "6.4",
-            "ref": "32126346f25e1cee607cc4aa6783d46034920554"
+            "version": "7.3",
+            "ref": "a64726446f6dcf3721f192c1df35418d69b3ba92"
         },
         "files": [
+            ".editorconfig",
             "config/packages/cache.yaml",
             "config/packages/framework.yaml",
             "config/preload.php",
@@ -232,28 +234,25 @@
             "config/packages/mercure.yaml"
         ]
     },
-    "symfony/phpunit-bridge": {
-        "version": "6.4",
+    "symfony/property-info": {
+        "version": "7.3",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "6.3",
-            "ref": "a411a0480041243d97382cac7984f7dce7813c08"
+            "version": "7.3",
+            "ref": "dae70df71978ae9226ae915ffd5fad817f5ca1f7"
         },
         "files": [
-            ".env.test",
-            "bin/phpunit",
-            "phpunit.xml.dist",
-            "tests/bootstrap.php"
+            "config/packages/property_info.yaml"
         ]
     },
     "symfony/routing": {
-        "version": "6.4",
+        "version": "7.3",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "6.2",
-            "ref": "e0a11b4ccb8c9e70b574ff5ad3dfdcd41dec5aa6"
+            "version": "7.3",
+            "ref": "21b72649d5622d8f7da329ffb5afb232a023619d"
         },
         "files": [
             "config/packages/routing.yaml",
@@ -286,25 +285,34 @@
             "templates/base.html.twig"
         ]
     },
-    "symfony/validator": {
-        "version": "5.4",
+    "symfony/uid": {
+        "version": "7.3",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "5.3",
-            "ref": "c32cfd98f714894c4f128bb99aa2530c1227603c"
+            "version": "7.0",
+            "ref": "0df5844274d871b37fc3816c57a768ffc60a43a5"
+        }
+    },
+    "symfony/validator": {
+        "version": "7.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "7.0",
+            "ref": "8c1c4e28d26a124b0bb273f537ca8ce443472bfd"
         },
         "files": [
             "config/packages/validator.yaml"
         ]
     },
     "symfony/web-profiler-bundle": {
-        "version": "6.4",
+        "version": "7.3",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "6.1",
-            "ref": "8b51135b84f4266e3b4c8a6dc23c9d1e32e543b7"
+            "version": "7.3",
+            "ref": "5b2b543e13942495c0003f67780cb4448af9e606"
         },
         "files": [
             "config/packages/web_profiler.yaml",

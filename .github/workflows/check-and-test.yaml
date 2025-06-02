@@ -28,7 +28,7 @@ jobs:
         strategy:
             fail-fast: true
             matrix:
-                php-versions: ['8.3']
+                php-versions: ['8.4']
         steps:
             # —— Setup Github actions 🐙 —————————————————————————————————————————————
             # https://github.com/actions/checkout (official)
@@ -70,4 +70,4 @@ jobs:
               run: bin/console hautelook:fixtures:load --no-interaction --env=test
             
             - name: Run phpunit
-              run: SYMFONY_DEPRECATIONS_HELPER=disabled vendor/bin/phpunit
+              run: SYMFONY_DEPRECATIONS_HELPER=disabled bin/phpunit

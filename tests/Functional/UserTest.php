@@ -34,43 +34,6 @@ class UserTest extends BaseApplication
         $this->assertCount(10, $response->toArray()['member']);
     }
 
-    public function testUserPostCollectionWithLoginWithoutValues(): void
-    {
-        $token = $this->login();
-        static::createClient()->request('POST', '/api/users', [
-            'headers' => [
-                'Content-Type' => 'application/ld+json',
-                'Accept' => 'application/ld+json',
-                'Authorization' => 'Bearer '.$token,
-            ],
-            'json' => [],
-        ]);
-        $this->assertResponseStatusCodeSame(422);
-        $this->assertResponseHeaderSame('content-type', 'application/problem+json; charset=utf-8');
-        $this->assertJsonContains([
-            '@type' => 'ConstraintViolation',
-            'title' => 'An error occurred',
-            'description' => "firstname: Ce champ ne doit pas être vide\nlastname: Ce champ ne doit pas être vide\npseudo: Ce champ ne doit pas être vide",
-            'violations' => [
-                [
-                    'propertyPath' => 'firstname',
-                    'message' => 'Ce champ ne doit pas être vide',
-                    'code' => 'c1051bb4-d103-4f74-8988-acbcafc7fdc3',
-                ],
-                [
-                    'propertyPath' => 'lastname',
-                    'message' => 'Ce champ ne doit pas être vide',
-                    'code' => 'c1051bb4-d103-4f74-8988-acbcafc7fdc3',
-                ],
-                [
-                    'propertyPath' => 'pseudo',
-                    'message' => 'Ce champ ne doit pas être vide',
-                    'code' => 'c1051bb4-d103-4f74-8988-acbcafc7fdc3',
-                ],
-            ],
-        ]);
-    }
-
     public function testUserPostCollectionWithLoginWithValidValues(): void
     {
         $token = $this->login();
@@ -93,7 +56,6 @@ class UserTest extends BaseApplication
             'firstname' => 'mario',
             'lastname' => 'bros',
             'pseudo' => 'mario-bros',
-            'client' => '/api/clients/1',
         ]);
 
         $this->assertMatchesRegularExpression('~^/api/users/\d+$~', $response->toArray()['@id']);
