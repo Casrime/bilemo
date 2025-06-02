@@ -4,7 +4,7 @@ CONSOLE	= $(EXEC) $(CONTAINER_NAME) bin/console
 DOCKER = docker
 DOCKER_COMPOSE = $(DOCKER) compose
 EXEC = $(DOCKER_COMPOSE) exec
-TESTS = vendor/bin/phpunit
+TESTS = bin/phpunit
 
 # Default values
 CONTAINER_NAME ?= php

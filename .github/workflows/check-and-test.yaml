@@ -70,4 +70,4 @@ jobs:
               run: bin/console hautelook:fixtures:load --no-interaction --env=test
             
             - name: Run phpunit
-              run: SYMFONY_DEPRECATIONS_HELPER=disabled vendor/bin/phpunit
+              run: SYMFONY_DEPRECATIONS_HELPER=disabled bin/phpunit
