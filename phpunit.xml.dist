@@ -31,10 +31,6 @@
         <include>
             <directory>src</directory>
         </include>
-
-        <deprecationTrigger>
-            <function>trigger_deprecation</function>
-        </deprecationTrigger>
     </source>
 
     <extensions>
