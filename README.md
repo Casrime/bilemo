@@ -15,6 +15,15 @@ Installation
 You need to install :
 - [Docker Engine][2]
 - [Docker Compose][3]
+- [mkcert][4]
+
+Install certificate to use HTTPS:
+
+```console
+mkcert -install
+mkdir -p frankenphp/certs
+mkcert -cert-file frankenphp/certs/tls.pem -key-file frankenphp/certs/tls.key "localhost"
+```
 
 Install the project :
 ```bash
@@ -78,3 +87,4 @@ Diagrams
 [1]: https://symfony.com/doc/current/reference/requirements.html
 [2]: https://docs.docker.com/installation/
 [3]: https://docs.docker.com/compose/
+[4]: https://github.com/FiloSottile/mkcert
