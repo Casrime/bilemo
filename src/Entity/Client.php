@@ -32,6 +32,9 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(min: 2, max: 30, minMessage: 'Merci de renseigner un minimum de {{ limit }} caractères', maxMessage: 'Merci de renseigner un maximum de {{ limit }} caractères')]
     private ?string $username = null;
 
+    /**
+     * @var array<string>
+     */
     #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
 
@@ -96,6 +99,9 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param array<string> $roles
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -136,6 +142,9 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     {
     }
 
+    /**
+     * @return ArrayCollection<int, User>
+     */
     public function getUsers(): Collection
     {
         return $this->users;
