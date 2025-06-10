@@ -32,7 +32,7 @@ final class ClientTest extends BaseApplication
             'totalItems' => 2,
         ]);
 
-        $this->assertCount(2, $response->toArray()['member']);
+        $this->assertEquals(2, $response->toArray()['member']);
     }
 
     public function testClientGetItemWithLogin(): void
@@ -52,6 +52,9 @@ final class ClientTest extends BaseApplication
             'id' => 1,
         ]);
 
-        $this->assertMatchesRegularExpression('~^/api/clients/\d+$~', $response->toArray()['@id']);
+        /** @var string $identifier */
+        $identifier = $response->toArray()['@id'];
+
+        $this->assertMatchesRegularExpression('~^/api/clients/\d+$~', $identifier);
     }
 }

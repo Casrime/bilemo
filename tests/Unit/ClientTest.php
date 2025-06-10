@@ -10,7 +10,7 @@ use App\Tests\BaseApplication;
 
 final class ClientTest extends BaseApplication
 {
-    private ?Client $client = null;
+    private Client $client;
 
     protected function setUp(): void
     {
@@ -42,11 +42,5 @@ final class ClientTest extends BaseApplication
         $this->assertCount(1, $this->client->getUsers());
         $this->client->removeUser($user);
         $this->assertCount(0, $this->client->getUsers());
-    }
-
-    #[\Override]
-    protected function tearDown(): void
-    {
-        $this->client = null;
     }
 }
