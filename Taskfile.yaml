@@ -1,0 +1,161 @@
+version: '3'
+
+silent: true
+
+vars:
+    APP_ENV: '{{.APP_ENV | default "dev"}}'
+    CONTAINER_NAME: '{{.CONTAINER_NAME | default "php"}}'
+
+tasks:
+    install:
+        desc: "Install project"
+        cmds:
+            - task env-local
+            - task dc-up
+            - task db-reset
+
+    bc:
+        desc: "The Symfony bin/console"
+        cmd: task dc -- exec php bin/console {{.CLI_ARGS}}
+
+    blackfire:
+        desc: "Run Blackfire"
+        cmd: task dc -- exec blackfire curl http://php/{{.URL}}
+
+    db-create:
+        desc: "Create database"
+        cmd: task bc -- doctrine:database:create --if-not-exists
+
+    db-drop:
+        desc: "Drop database"
+        cmd: task bc -- doctrine:database:drop --if-exists --force
+
+    db-fixtures:
+        desc: "Load fixtures"
+        cmd: task bc -- hautelook:fixtures:load --no-interaction
+
+    db-migrations:
+        desc: "Run migrations"
+        cmd: task bc -- doctrine:migrations:migrate --no-interaction
+
+    db-reset:
+        desc: "Reset database"
+        cmds:
+            - task: db-drop
+            - task: db-create
+            - task: db-migrations
+            - task: db-fixtures
+
+    dc:
+        desc: "Docker compose"
+        cmd: docker compose {{.CLI_ARGS}}
+
+    dc-build:
+        desc: "Docker compose build"
+        cmd: task dc -- build --pull
+        
+    dc-build-no-cache:
+        desc: "Docker compose build without cache"
+        cmd: task dc -- build --pull --no-cache
+
+    dc-down:
+        desc: "Docker compose down"
+        cmd: task dc -- down --remove-orphans --volumes
+
+    dc-exec:
+        desc: Interact with a container
+        cmd: task dc -- exec {{.CONTAINER_NAME}} sh
+
+    dc-kill:
+        desc: "Docker compose kill"
+        cmd: task dc -- kill
+
+    dc-logs:
+        desc: Show logs for a container
+        cmd: task dc -- logs -f {{.CLI_ARGS}}
+
+    dc-prod:
+        desc: "Docker compose prod"
+        cmd: task dc -- -f compose.yaml -f compose.prod.yaml up -d
+
+    dc-ps:
+        desc: "Docker compose ps"
+        cmd: task dc -- ps
+
+    dc-start:
+        desc: "Docker compose start"
+        cmd: task dc -- start
+              
+    dc-stop:
+        desc: "Docker compose stop"
+        cmd: task dc -- stop           
+
+    dc-up:
+        desc: "Docker compose up"
+        cmd: task dc -- up -d
+    
+    env-local:
+        desc: Create .env.local file if it doesn't exist
+        cmd: |
+            if [ ! -f .env.local ]; then
+              cp .env .env.local
+              echo ".env.local file created"
+            fi
+        status:
+            - test -f .env.local
+
+    checks:
+        desc: "Run checks"
+        cmds:
+            - task: rector
+            - task: php-cs-fixer
+            - task: twig-cs-fixer
+            - task: phpstan
+            - task: yaml-lint
+    
+    php-cs-fixer:
+        desc: "Run PHP-CS-Fixer"
+        cmd: PHP_CS_FIXER_IGNORE_ENV=true ./vendor/bin/php-cs-fixer fix
+    
+    phpstan:
+        desc: "Run PHPStan"
+        cmd: ./vendor/bin/phpstan analyse --memory-limit=1G
+
+    twig-cs-fixer:
+        desc: "Run Twig CS Fixer"
+        cmd: ./vendor/bin/twig-cs-fixer
+    
+    rector:
+        desc: "Run Rector"
+        cmd: ./vendor/bin/rector
+
+    yaml-lint:
+        desc: "Run Yaml Lint"
+        cmd: bin/console lint:yaml config
+    
+    tests:
+        desc: "PHPUnit"
+        cmd: task dc -- exec php bin/phpunit {{.CLI_ARGS}}
+    
+    coverage:
+        desc: "PHPUnit with coverage"
+        cmd: task dc -- exec --env XDEBUG_MODE=coverage php bin/phpunit --coverage-html=var/coverage {{.CLI_ARGS}}
+
+    generate-ssh-keys:
+        desc: "Generate SSH Keys for JWT"
+        cmd: |
+            mkdir -p config/jwt
+            openssl genrsa -out config/jwt/private.pem -aes256 4096
+            openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
+
+    generate-token:
+        desc: "Generate token"
+        cmd: |
+            clear
+            read -p "Username: " USERNAME
+            read -s -p "Password: " PASSWORD
+            echo ""
+            curl -X POST https://localhost/api/login_check \
+                -H "Content-Type: application/json" \
+                -d '{"username":"'$USERNAME'", "password":"'$PASSWORD'"}' \
+                --insecure

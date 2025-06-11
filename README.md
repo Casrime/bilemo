@@ -14,7 +14,7 @@ Installation
 ------------
 You need to install :
 - [Docker Engine][2]
-- [Docker Compose][3]
+- [Task][3]
 - [mkcert][4]
 
 Install certificate to use HTTPS:
@@ -27,17 +27,17 @@ mkcert -cert-file frankenphp/certs/tls.pem -key-file frankenphp/certs/tls.key "l
 
 Install the project :
 ```bash
-$ make install
+$ task install
 ```
 
 Generate SSH Keys :
 ```bash
-$ make generate-ssh-keys
+$ task generate-ssh-keys
 ```
 
 Generate Token :
 ```bash
-$ make generate-token
+$ task generate-token
 ```
 
 You should have a response like this from the CLI :
@@ -53,17 +53,17 @@ Usage
 ------------
 Boot containers :
 ```bash
-$ make dc-up
+$ task dc-up
 ```
 
 To interact with the PHP container :
 ```bash
-$ make dc-exec
+$ task dc-exec
 ```
 
 Create database, run migrations and load fixtures :
 ```bash
-$ make db-reset
+$ task db-reset
 ```
 
 Tests
@@ -71,13 +71,15 @@ Tests
 
 Execute this command to run tests:
 ```bash
-$ make tests
+$ task tests
 ```
 
-Reset tests
+Coverage
 ------------
+
+Execute this command to run tests with coverage:
 ```bash
-$ make tests-reset
+$ task coverage
 ```
 
 Diagrams
@@ -86,5 +88,5 @@ Diagrams
 
 [1]: https://symfony.com/doc/current/reference/requirements.html
 [2]: https://docs.docker.com/installation/
-[3]: https://docs.docker.com/compose/
+[3]: https://taskfile.dev/installation/
 [4]: https://github.com/FiloSottile/mkcert

@@ -52,8 +52,16 @@ jobs:
             - name: Install Composer dependencies
               run: composer install
 
+            # —— Task 🧙‍♀️ —————————————————————————————————————————————————————————
+            - name: Install Task
+              uses: arduino/setup-task@v2
+              with:
+                version: 3.x
+                repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+            # —— Symfony checks 🧙‍♀️ ———————————————————————————————————————————————    
             - name: Run checks
-              run: make checks
+              run: task checks
 
             # —— Symfony console 🐙 ——————————————————————————————————————————————————
             - name: Generate SSH Keys
