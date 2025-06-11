@@ -139,7 +139,7 @@ tasks:
     
     coverage:
         desc: "PHPUnit with coverage"
-        cmd: task dc -- exec --env XDEBUG_MODE=coverage php bin/phpunit --coverage-html=var/coverage {{.CLI_ARGS}}
+        cmd: task dc -- exec --env XDEBUG_MODE=coverage php bin/phpunit --coverage-html=vendor/coverage {{.CLI_ARGS}}
 
     generate-ssh-keys:
         desc: "Generate SSH Keys for JWT"
