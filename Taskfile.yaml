@@ -24,19 +24,19 @@ tasks:
 
     db-create:
         desc: "Create database"
-        cmd: task bc -- doctrine:database:create --if-not-exists
+        cmd: task bc -- doctrine:database:create --if-not-exists --env={{.APP_ENV}}
 
     db-drop:
         desc: "Drop database"
-        cmd: task bc -- doctrine:database:drop --if-exists --force
+        cmd: task bc -- doctrine:database:drop --if-exists --force --env={{.APP_ENV}}
 
     db-fixtures:
         desc: "Load fixtures"
-        cmd: task bc -- hautelook:fixtures:load --no-interaction
+        cmd: task bc -- hautelook:fixtures:load --no-interaction --env={{.APP_ENV}}
 
     db-migrations:
         desc: "Run migrations"
-        cmd: task bc -- doctrine:migrations:migrate --no-interaction
+        cmd: task bc -- doctrine:migrations:migrate --no-interaction --env={{.APP_ENV}}
 
     db-reset:
         desc: "Reset database"
