@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 
-class BaseApplication extends ApiTestCase
+abstract class BaseApplication extends ApiTestCase
 {
     protected function login(): string
     {

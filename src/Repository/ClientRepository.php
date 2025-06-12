@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Client;
@@ -11,8 +13,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ClientRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $managerRegistry)
     {
-        parent::__construct($registry, Client::class);
+        parent::__construct($managerRegistry, Client::class);
     }
 }

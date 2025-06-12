@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Functional;
 
 use App\Entity\User;
 use App\Tests\BaseApplication;
 
-class UserTest extends BaseApplication
+final class UserTest extends BaseApplication
 {
     public function testUserGetCollectionWithoutAuthentication(): void
     {

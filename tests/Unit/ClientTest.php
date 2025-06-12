@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Unit;
 
 use App\Entity\Client;
 use App\Entity\User;
 use App\Tests\BaseApplication;
 
-class ClientTest extends BaseApplication
+final class ClientTest extends BaseApplication
 {
     private ?Client $client = null;
 
@@ -42,6 +44,7 @@ class ClientTest extends BaseApplication
         $this->assertCount(0, $this->client->getUsers());
     }
 
+    #[\Override]
     protected function tearDown(): void
     {
         $this->client = null;

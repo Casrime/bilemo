@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Unit;
 
 use App\Entity\Phone;
 use App\Tests\BaseApplication;
 
-class PhoneTest extends BaseApplication
+final class PhoneTest extends BaseApplication
 {
     private ?Phone $phone = null;
 
@@ -39,6 +41,7 @@ class PhoneTest extends BaseApplication
         $this->assertEquals('Hello from Bilemo', $this->phone->getDescription());
     }
 
+    #[\Override]
     protected function tearDown(): void
     {
         $this->phone = null;
