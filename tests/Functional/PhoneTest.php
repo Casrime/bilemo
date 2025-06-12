@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Functional;
 
 use App\Entity\Phone;
 use App\Tests\BaseApplication;
 
-class PhoneTest extends BaseApplication
+final class PhoneTest extends BaseApplication
 {
     public function testPhoneGetCollectionWithoutAuthentication(): void
     {

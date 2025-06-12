@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\EventSubscriber;
 
 use ApiPlatform\Symfony\EventListener\EventPriorities;
@@ -14,13 +16,13 @@ class UserSubscriber implements EventSubscriberInterface
     {
     }
 
-    public function addUser(ViewEvent $event): void
+    public function addUser(ViewEvent $viewEvent): void
     {
-        if ($event->isMainRequest() && $event->getRequest()->isMethod('POST') && '/api/users' == $event->getRequest()->getPathInfo()) {
-            $user = $event->getControllerResult();
+        if ($viewEvent->isMainRequest() && $viewEvent->getRequest()->isMethod('POST') && '/api/users' === $viewEvent->getRequest()->getPathInfo()) {
+            $user = $viewEvent->getControllerResult();
             $user->setBirthdayDate(new \DateTime('1980-01-01'));
             $user->setClient($this->tokenStorage->getToken()->getUser());
-            $event->setControllerResult($user);
+            $viewEvent->setControllerResult($user);
         }
     }
 

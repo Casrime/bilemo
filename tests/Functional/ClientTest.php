@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Functional;
 
 use App\Tests\BaseApplication;
 
-class ClientTest extends BaseApplication
+final class ClientTest extends BaseApplication
 {
     public function testClientGetCollectionWithoutAuthentication(): void
     {

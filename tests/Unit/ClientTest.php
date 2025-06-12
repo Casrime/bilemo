@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Unit;
 
 use App\Entity\Client;
 use App\Entity\User;
 use App\Tests\BaseApplication;
 
-class ClientTest extends BaseApplication
+final class ClientTest extends BaseApplication
 {
     private ?Client $client = null;
 
