@@ -44,6 +44,7 @@ final class ClientTest extends BaseApplication
         $this->assertCount(0, $this->client->getUsers());
     }
 
+    #[\Override]
     protected function tearDown(): void
     {
         $this->client = null;

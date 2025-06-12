@@ -41,6 +41,7 @@ final class PhoneTest extends BaseApplication
         $this->assertEquals('Hello from Bilemo', $this->phone->getDescription());
     }
 
+    #[\Override]
     protected function tearDown(): void
     {
         $this->phone = null;
