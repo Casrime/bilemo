@@ -1,6 +1,6 @@
 version: '3'
 
-silent: true
+# silent: true
 
 vars:
     APP_ENV: '{{.APP_ENV | default "dev"}}'
@@ -51,12 +51,12 @@ tasks:
         cmd: docker compose {{.CLI_ARGS}}
 
     dc-build:
-        desc: "Docker compose build"
-        cmd: task dc -- build --pull
-        
-    dc-build-no-cache:
-        desc: "Docker compose build without cache"
-        cmd: task dc -- build --pull --no-cache
+        desc: "Docker compose build images for dev and prod"
+        cmds: 
+            # Build image for dev environment (default)
+            - task dc -- build {{.CLI_ARGS}}
+            # Build image for prod environment
+            - task dc -- -f compose.yaml -f compose.prod.yaml build {{.CLI_ARGS}}
 
     dc-down:
         desc: "Docker compose down"
@@ -64,7 +64,7 @@ tasks:
 
     dc-exec:
         desc: Interact with a container
-        cmd: task dc -- exec {{.CONTAINER_NAME}} sh
+        cmd: task dc -- exec {{.CONTAINER_NAME}} {{.CLI_ARGS | default "sh"}}
 
     dc-kill:
         desc: "Docker compose kill"
@@ -76,7 +76,7 @@ tasks:
 
     dc-prod:
         desc: "Docker compose prod"
-        cmd: task dc -- -f compose.yaml -f compose.prod.yaml up -d
+        cmd: task dc -- -f compose.yaml -f compose.prod.yaml up --wait
 
     dc-ps:
         desc: "Docker compose ps"
@@ -92,7 +92,7 @@ tasks:
 
     dc-up:
         desc: "Docker compose up"
-        cmd: task dc -- up -d
+        cmd: task dc -- up --wait
     
     env-local:
         desc: Create .env.local file if it doesn't exist
