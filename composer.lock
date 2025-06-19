@@ -95,7 +95,7 @@
         },
         {
             "name": "api-platform/doctrine-orm",
-            "version": "v4.1.16",
+            "version": "v4.1.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/doctrine-orm.git",
@@ -174,7 +174,7 @@
                 "rest"
             ],
             "support": {
-                "source": "https://github.com/api-platform/doctrine-orm/tree/v4.1.16"
+                "source": "https://github.com/api-platform/doctrine-orm/tree/v4.1.17"
             },
             "time": "2025-06-06T14:56:47+00:00"
         },
@@ -919,7 +919,7 @@
         },
         {
             "name": "api-platform/symfony",
-            "version": "v4.1.16",
+            "version": "v4.1.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/symfony.git",
@@ -1037,7 +1037,7 @@
                 "symfony"
             ],
             "support": {
-                "source": "https://github.com/api-platform/symfony/tree/v4.1.16"
+                "source": "https://github.com/api-platform/symfony/tree/v4.1.17"
             },
             "time": "2025-06-13T12:57:40+00:00"
         },
