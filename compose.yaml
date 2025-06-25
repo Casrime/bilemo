@@ -1,9 +1,4 @@
 services:
-    blackfire:
-        image: blackfire/blackfire:2
-        ports:
-            - "8307:8307"
-
     database:
         image: postgres:${POSTGRES_VERSION:-17}-alpine
         environment:
@@ -18,7 +13,7 @@ services:
         image: ${IMAGES_PREFIX:-}app-php
         restart: unless-stopped
         environment:
-            SERVER_NAME: ${SERVER_NAME:-localhost}, php:443
+            SERVER_NAME: ${SERVER_NAME:-localhost}
             MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
             MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
             # Run "composer require symfony/mercure-bundle" to install and configure the Mercure integration
