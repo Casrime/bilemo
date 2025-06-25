@@ -9,6 +9,7 @@
         "ext-iconv": "*",
         "api-platform/doctrine-orm": "^4.1",
         "api-platform/symfony": "*",
+        "blackfireio/blackfire-symfony-meta": "^2.0",
         "doctrine/annotations": "^2.0",
         "doctrine/doctrine-bundle": "^1.6 || ^2.0",
         "doctrine/doctrine-migrations-bundle": "^3.0",
@@ -80,7 +81,8 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "7.3.*"
+            "require": "7.3.*",
+            "docker": true
         }
     },
     "require-dev": {

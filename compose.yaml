@@ -1,9 +1,4 @@
 services:
-    blackfire:
-        image: blackfire/blackfire:2
-        ports:
-            - "8307:8307"
-
     database:
         image: postgres:${POSTGRES_VERSION:-17}-alpine
         environment:
