@@ -10,9 +10,17 @@ tasks:
     install:
         desc: "Install project"
         cmds:
+            - task certs
             - task env-local
             - task dc-up
             - task db-reset
+            - APP_ENV=test task db-reset
+
+    reset:
+        desc: "Reset project"
+        cmds:
+            - task dc-down
+            - task install
 
     bc:
         desc: "The Symfony bin/console"
@@ -21,6 +29,13 @@ tasks:
     blackfire:
         desc: "Run Blackfire"
         cmd: task dc -- exec blackfire curl http://php/{{.URL}}
+
+    certs:
+        desc: "Generate certificates"
+        cmds:
+            - mkcert -install
+            - mkdir -p frankenphp/certs
+            - mkcert -cert-file frankenphp/certs/tls.pem -key-file frankenphp/certs/tls.key "localhost"
 
     db-create:
         desc: "Create database"
