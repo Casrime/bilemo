@@ -17,14 +17,6 @@ You need to install :
 - [Task][3]
 - [mkcert][4]
 
-Install certificate to use HTTPS:
-
-```console
-mkcert -install
-mkdir -p frankenphp/certs
-mkcert -cert-file frankenphp/certs/tls.pem -key-file frankenphp/certs/tls.key "localhost"
-```
-
 Install the project :
 ```bash
 $ task install
