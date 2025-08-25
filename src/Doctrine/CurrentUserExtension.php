@@ -12,6 +12,7 @@ use App\Entity\Client;
 use App\Entity\User;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 final readonly class CurrentUserExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
@@ -31,7 +32,12 @@ final readonly class CurrentUserExtension implements QueryCollectionExtensionInt
 
     private function addWhere(QueryBuilder $queryBuilder, string $resourceClass): void
     {
-        $user = $this->tokenStorage->getToken()->getUser();
+        /** @var TokenInterface|null $token */
+        $token = $this->tokenStorage->getToken();
+        if (!$token) {
+            return;
+        }
+        $user = $token->getUser();
         if ($user instanceof Client && User::class === $resourceClass) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
             $queryBuilder->andWhere(sprintf('%s.client = :current_user', $rootAlias));

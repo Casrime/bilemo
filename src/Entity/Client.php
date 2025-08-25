@@ -74,6 +74,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
+        assert((string) $this->username !== '');
         return (string) $this->username;
     }
 
@@ -145,7 +146,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return ArrayCollection<int, User>
+     * @return Collection<int, User>
      */
     public function getUsers(): Collection
     {
