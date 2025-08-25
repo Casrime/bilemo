@@ -33,7 +33,11 @@ final class UserTest extends BaseApplication
             'totalItems' => 10,
         ]);
 
-        $this->assertEquals(10, $response->toArray()['member']);
+        /** @var array<int, array<string, mixed>> $member */
+        $member = $response->toArray()['member'];
+
+        $this->assertCount(10, $member);
+        $this->assertMatchesResourceCollectionJsonSchema(User::class);
     }
 
     public function testUserPostCollectionWithLoginWithValidValues(): void

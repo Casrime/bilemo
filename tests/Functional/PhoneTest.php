@@ -33,7 +33,10 @@ final class PhoneTest extends BaseApplication
             'totalItems' => 1,
         ]);
 
-        $this->assertEquals(1, $response->toArray()['member']);
+        /** @var array<int, array<string, mixed>> $member */
+        $member = $response->toArray()['member'];
+
+        $this->assertCount(1, $member);
         $this->assertMatchesResourceCollectionJsonSchema(Phone::class);
     }
 
