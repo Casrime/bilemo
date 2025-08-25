@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use ApiPlatform\Symfony\EventListener\EventPriorities;
+use App\Entity\Client;
+use App\Entity\User;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class UserSubscriber implements EventSubscriberInterface
 {
@@ -19,9 +22,14 @@ class UserSubscriber implements EventSubscriberInterface
     public function addUser(ViewEvent $viewEvent): void
     {
         if ($viewEvent->isMainRequest() && $viewEvent->getRequest()->isMethod('POST') && '/api/users' === $viewEvent->getRequest()->getPathInfo()) {
+            /** @var User $user */
             $user = $viewEvent->getControllerResult();
             $user->setBirthdayDate(new \DateTime('1980-01-01'));
-            $user->setClient($this->tokenStorage->getToken()->getUser());
+            /** @var TokenInterface $token */
+            $token = $this->tokenStorage->getToken();
+            /** @var Client $client */
+            $client = $token->getUser();
+            $user->setClient($client);
             $viewEvent->setControllerResult($user);
         }
     }
