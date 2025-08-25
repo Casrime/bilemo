@@ -33,7 +33,11 @@ final class UserTest extends BaseApplication
             'totalItems' => 10,
         ]);
 
-        $this->assertCount(10, $response->toArray()['member']);
+        /** @var array<int, array<string, mixed>> $member */
+        $member = $response->toArray()['member'];
+
+        $this->assertCount(10, $member);
+        $this->assertMatchesResourceCollectionJsonSchema(User::class);
     }
 
     public function testUserPostCollectionWithLoginWithValidValues(): void
@@ -60,7 +64,10 @@ final class UserTest extends BaseApplication
             'pseudo' => 'mario-bros',
         ]);
 
-        $this->assertMatchesRegularExpression('~^/api/users/\d+$~', $response->toArray()['@id']);
+        /** @var string $identifier */
+        $identifier = $response->toArray()['@id'];
+
+        $this->assertMatchesRegularExpression('~^/api/users/\d+$~', $identifier);
         $this->assertMatchesResourceItemJsonSchema(User::class);
     }
 
@@ -82,7 +89,10 @@ final class UserTest extends BaseApplication
             'client' => '/api/clients/1',
         ]);
 
-        $this->assertMatchesRegularExpression('~^/api/users/\d+$~', $response->toArray()['@id']);
+        /** @var string $identifier */
+        $identifier = $response->toArray()['@id'];
+
+        $this->assertMatchesRegularExpression('~^/api/users/\d+$~', $identifier);
         $this->assertMatchesResourceItemJsonSchema(User::class);
     }
 }

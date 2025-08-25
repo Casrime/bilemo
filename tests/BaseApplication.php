@@ -17,6 +17,13 @@ abstract class BaseApplication extends ApiTestCase
             ],
         ])->toArray();
 
-        return $response['token'];
+        if (!isset($response['token'])) {
+            throw new \RuntimeException('Token not found');
+        }
+
+        /** @var string $token */
+        $token = $response['token'];
+
+        return $token;
     }
 }

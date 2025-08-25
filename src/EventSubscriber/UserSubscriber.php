@@ -25,8 +25,11 @@ class UserSubscriber implements EventSubscriberInterface
             /** @var User $user */
             $user = $viewEvent->getControllerResult();
             $user->setBirthdayDate(new \DateTime('1980-01-01'));
-            /** @var TokenInterface $token */
+            /** @var TokenInterface|null $token */
             $token = $this->tokenStorage->getToken();
+            if (null === $token) {
+                return;
+            }
             /** @var Client $client */
             $client = $token->getUser();
             $user->setClient($client);

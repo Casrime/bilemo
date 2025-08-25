@@ -9,7 +9,7 @@ use App\Tests\BaseApplication;
 
 final class PhoneTest extends BaseApplication
 {
-    private ?Phone $phone = null;
+    private Phone $phone;
 
     protected function setUp(): void
     {
@@ -39,11 +39,5 @@ final class PhoneTest extends BaseApplication
     {
         $this->phone->setDescription('Hello from Bilemo');
         $this->assertEquals('Hello from Bilemo', $this->phone->getDescription());
-    }
-
-    #[\Override]
-    protected function tearDown(): void
-    {
-        $this->phone = null;
     }
 }

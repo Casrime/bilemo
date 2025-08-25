@@ -33,7 +33,10 @@ final class PhoneTest extends BaseApplication
             'totalItems' => 1,
         ]);
 
-        $this->assertCount(1, $response->toArray()['member']);
+        /** @var array<int, array<string, mixed>> $member */
+        $member = $response->toArray()['member'];
+
+        $this->assertCount(1, $member);
         $this->assertMatchesResourceCollectionJsonSchema(Phone::class);
     }
 
@@ -58,6 +61,9 @@ final class PhoneTest extends BaseApplication
             'description' => 'Le meilleur iPhone',
         ]);
 
-        $this->assertMatchesRegularExpression('~^/api/phones/\d+$~', $response->toArray()['@id']);
+        /** @var string $identifier */
+        $identifier = $response->toArray()['@id'];
+
+        $this->assertMatchesRegularExpression('~^/api/phones/\d+$~', $identifier);
     }
 }

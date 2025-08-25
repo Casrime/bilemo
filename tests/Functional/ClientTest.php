@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
+use App\Entity\Client;
 use App\Tests\BaseApplication;
 
 final class ClientTest extends BaseApplication
@@ -32,7 +33,11 @@ final class ClientTest extends BaseApplication
             'totalItems' => 2,
         ]);
 
-        $this->assertCount(2, $response->toArray()['member']);
+        /** @var array<int, array<string, mixed>> $member */
+        $member = $response->toArray()['member'];
+
+        $this->assertCount(2, $member);
+        $this->assertMatchesResourceCollectionJsonSchema(Client::class);
     }
 
     public function testClientGetItemWithLogin(): void
@@ -52,6 +57,9 @@ final class ClientTest extends BaseApplication
             'id' => 1,
         ]);
 
-        $this->assertMatchesRegularExpression('~^/api/clients/\d+$~', $response->toArray()['@id']);
+        /** @var string $identifier */
+        $identifier = $response->toArray()['@id'];
+
+        $this->assertMatchesRegularExpression('~^/api/clients/\d+$~', $identifier);
     }
 }
