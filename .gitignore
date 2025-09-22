@@ -38,3 +38,4 @@
 ###< vincentlanglet/twig-cs-fixer ###
 
 /frankenphp/certs/
+/openapi.json

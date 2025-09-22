@@ -15,6 +15,7 @@ tasks:
             - task dc-up
             - task db-reset
             - APP_ENV=test task db-reset
+            - task openapi:export
 
     reset:
         desc: "Reset project"
@@ -118,6 +119,10 @@ tasks:
             fi
         status:
             - test -f .env.local
+
+    openapi:export:
+        desc: "Export OpenAPI spec"
+        cmd: task bc -- api:openapi:export --output=openapi.json
 
     checks:
         desc: "Run checks"
