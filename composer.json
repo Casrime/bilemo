@@ -11,7 +11,7 @@
         "api-platform/symfony": "*",
         "blackfireio/blackfire-symfony-meta": "^2.0",
         "doctrine/annotations": "^2.0",
-        "doctrine/doctrine-bundle": "^1.6 || ^2.0",
+        "doctrine/doctrine-bundle": "^1.6 || ^2.0 || ^3.0",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^3.0.0",
         "lexik/jwt-authentication-bundle": "^3.0",
