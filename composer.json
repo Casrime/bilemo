@@ -27,14 +27,14 @@
         "symfony/mailer": "7.3.*",
         "symfony/maker-bundle": "^1.11",
         "symfony/mercure-bundle": "^0.3.9",
-        "symfony/runtime": "7.3.*",
+        "symfony/runtime": "7.4.*",
         "symfony/security-bundle": "7.3.*",
         "symfony/stopwatch": "7.3.*",
         "symfony/twig-bundle": "7.3.*",
         "symfony/validator": "7.3.*",
         "symfony/var-dumper": "7.3.*",
         "symfony/web-profiler-bundle": "7.3.*",
-        "symfony/yaml": "7.3.*"
+        "symfony/yaml": "7.4.*"
     },
     "config": {
         "preferred-install": {
