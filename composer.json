@@ -17,7 +17,7 @@
         "lexik/jwt-authentication-bundle": "^3.0",
         "nelmio/cors-bundle": "^1.5 || ^2.0",
         "phpdocumentor/reflection-docblock": "^3.0 || ^4.0 || ^5.3",
-        "runtime/frankenphp-symfony": "^0.2.0",
+        "runtime/frankenphp-symfony": "^1.0.0",
         "symfony/asset": "7.3.*",
         "symfony/console": "7.3.*",
         "symfony/dotenv": "7.3.*",
